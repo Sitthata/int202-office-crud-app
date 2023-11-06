@@ -24,7 +24,7 @@
     </div>
 </nav>
 <section class="px-4 py-5">
-    <div class="flex flex-col gap-3 md:flex-wrap md:flex-row">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <c:forEach items="${requestScope.offices}" var="office">
             <div class="bg-emerald-600 flex flex-col gap-3 p-3 rounded-lg md:min-w-auto w-full min-h-[250px]">
                 <h2 class="text-lg font-semibold">Code:${office.officeCode}</h2>
