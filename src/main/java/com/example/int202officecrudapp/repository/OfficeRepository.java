@@ -48,6 +48,26 @@ public class OfficeRepository {
         }
     }
 
+    public void delete(Office office) throws IllegalArgumentException, PersistenceException {
+        if (office.getOfficeCode() == null) {
+            throw new IllegalArgumentException("Office cannot be updated with null officeCode");
+        }
+
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.remove(em.merge(office));
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
     public void update(Office office) throws IllegalArgumentException, PersistenceException {
         if (office.getOfficeCode() == null) {
             throw new IllegalArgumentException("Office cannot be updated with null officeCode");
