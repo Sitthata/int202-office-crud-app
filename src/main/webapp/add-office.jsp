@@ -9,7 +9,6 @@
 <nav class="flex justify-between items-center p-5">
     <h1 class="text-5xl font-bold">Office Manager ::</h1>
     <div class="flex gap-2">
-        <!-- Assume other links lead to their respective JSP pages -->
         <a href="office-list" class="bg-sky-400 font-semibold px-[0.75rem] py-[0.5rem] rounded-lg">Office List</a>
     </div>
 </nav>
@@ -17,7 +16,6 @@
 <section class="px-4 py-5">
     <div class="w-full lg:max-w-lg lg:mx-auto">
         <form action="add-office" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <!-- Hidden field to specify the action for the servlet -->
             <input type="hidden" name="action" value="add">
 
             <div class="mb-4">

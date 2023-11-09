@@ -3,9 +3,9 @@ package com.example.int202officecrudapp.repository;
 import com.example.int202officecrudapp.model.Office;
 import com.example.int202officecrudapp.utils.EntityManagerBuilder;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class OfficeRepository {
@@ -27,6 +27,22 @@ public class OfficeRepository {
         EntityManager em = getEntityManager();
         try {
             return em.find(Office.class, officeCode);
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Office> findByCountryOrCity(String cityOrCountry) {
+        EntityManager em = getEntityManager();
+        try {
+            List<Office> offices = em.createNamedQuery("Office.FindByCityOrCountry", Office.class)
+                    .setParameter("cityParam", "%" + cityOrCountry + "%")
+                    .setParameter("countryParam", "%" + cityOrCountry + "%")
+                    .getResultList();
+            if (offices.isEmpty()) {
+                return Collections.emptyList();
+            }
+            return offices;
         } finally {
             em.close();
         }
